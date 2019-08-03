@@ -84,7 +84,7 @@ country_event = {
   option = { # Where could they have gone?
     name = pirate_republic.10.option
 
-    event_target:pirate_target = { planet_event = { id = pirate_republic.11 days = 3 random = 4 } }
+    hidden_effect = { event_target:pirate_target = { planet_event = { id = pirate_republic.11 days = 3 random = 4 } } }
   }
 }
 
@@ -109,7 +109,7 @@ planet_event = {
       authority = auth_corporate
       civics = {
         civic = civic_naval_contractors
-        civic = civic_criminal_heritage
+        civic = random
       }
       species = Root.owner.species
       flag = random
@@ -131,7 +131,7 @@ planet_event = {
             }
           }
           while = {
-            count = 50
+            count = 25
             create_army = {
               name = "Pirate Invaders"
               owner = event_target:pirate_republic
@@ -157,7 +157,7 @@ planet_event = {
   }
 
   option = {
-    name = pirate_republic.11.name
+    name = pirate_republic.11.option
   }
 }
 
@@ -192,7 +192,7 @@ country_event = {
   }
 
   option = {
-    name = pirate_republic.12.name
+    name = pirate_republic.12.option
   }
 }
 
@@ -239,7 +239,12 @@ country_event = {
   option = {
     name = pirate_republic.13.option
 
-    country_event = { id = pirate_republic.14 }
+    hidden_effect = {
+      if = {
+        limit = { any_subject = { has_country_flag = pirate_republic } }
+        country_event = { id = pirate_republic.14 }
+      }
+    }
   }
 }
 
@@ -309,7 +314,7 @@ country_event = {
 # pirate_republic.101: Let's hear this proposal of yours...
 country_event = {
   id = pirate_republic.101
-  title = pirate_republic.101.name
+  title = pirate_republic.100.name
   desc = pirate_republic.101.desc
   location = event_target:pirate_republic
 
@@ -341,7 +346,7 @@ country_event = {
 # pirate_republic.102: Are you insane?
 country_event = {
   id = pirate_republic.102
-  title = pirate_republic.102.name
+  title = pirate_republic.100.name
   desc = pirate_republic.102.desc
   location = event_target:pirate_republic
 
@@ -373,7 +378,7 @@ country_event = {
 # pirate_republic.103: Transform into subject empire
 country_event = {
   id = pirate_republic.103
-  title = pirate_republic.103.name
+  title = pirate_republic.100.name
   desc = pirate_republic.103.desc
   location = event_target:pirate_republic
 
@@ -391,8 +396,8 @@ country_event = {
 
   option = {
     name = pirate_republic.103.option
-    set_country_type = default
     event_target:pirate_republic = {
+      set_country_type = default
       set_subject_of = {
         who = Root
         subject_type = tributary
@@ -404,7 +409,7 @@ country_event = {
 # pirate_republic.104: Offer refused
 country_event = {
   id = pirate_republic.104
-  title = pirate_republic.104.name
+  title = pirate_republic.100.name
   desc = pirate_republic.104.desc
   location = event_target:pirate_republic
 
