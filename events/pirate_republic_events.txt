@@ -100,56 +100,114 @@ planet_event = {
   is_triggered_only = yes
 
   immediate = {
-    create_rebels = {
-      name = random
-      ethos = {
-        ethic = "ethic_fanatic_militarist"
-        ethic = "ethic_authoritarian"
-      }
-      authority = auth_corporate
-      civics = {
-        civic = civic_naval_contractors
-        civic = random
-      }
-      species = Root.owner.species
-      flag = random
+    if = {
+      limit = { host_has_dlc = "Megacorp" }
+      create_rebels = {
+        name = random
+        ethos = {
+          ethic = "ethic_fanatic_militarist"
+          ethic = "ethic_authoritarian"
+        }
+        authority = auth_corporate
+        civics = {
+          civic = civic_criminal_heritage
+          civic = random
+        }
+        species = Root.owner.species
+        flag = random
 
-      effect = {
-        randomize_flag_symbol = pirate
-        set_country_flag = pirate_republic
-        save_event_target_as = pirate_republic
-        establish_communications_no_message = root.owner
-        set_relation_flag = {
-          flag = rebelling_pirates_former_owner
-          who = Root.owner
-        }
-        Root = {
-          owner = {
-            every_relation = {
-              limit = { has_communications = prev }
-              establish_communications_no_message = prevprevprev
+        effect = {
+          randomize_flag_symbol = pirate
+          set_country_flag = pirate_republic
+          save_event_target_as = pirate_republic
+          establish_communications_no_message = root.owner
+          set_relation_flag = {
+            flag = rebelling_pirates_former_owner
+            who = Root.owner
+          }
+          Root = {
+            owner = {
+              every_relation = {
+                limit = { has_communications = prev }
+                establish_communications_no_message = prevprevprev
+              }
+            }
+            while = {
+              count = 25
+              create_army = {
+                name = "Pirate Invaders"
+                owner = event_target:pirate_republic
+                species = Root.owner.species
+                type = "pirate_army"
+              }
             }
           }
-          while = {
-            count = 25
-            create_army = {
-              name = "Pirate Invaders"
-              owner = event_target:pirate_republic
-              species = Root.owner.species
-              type = "pirate_army"
-            }
+          create_leader = {
+            class = ruler
+            species = owner_main_species
+            name = random
+            skill = 2
+            traits = {}
+          }
+          assign_leader = last_created_leader
+          ruler = {
+            add_random_leader_trait = yes
           }
         }
-        create_leader = {
-          class = ruler
-          species = owner_main_species
-          name = random
-          skill = 2
-          traits = {}
+      }
+    }
+    else = {
+      create_rebels = {
+        name = random
+        ethos = {
+          ethic = "ethic_fanatic_militarist"
+          ethic = "ethic_authoritarian"
         }
-        assign_leader = last_created_leader
-        ruler = {
-          add_random_leader_trait = yes
+        authority = auth_oligarchic
+        civics = {
+          civic = civic_corporate_dominion
+          civic = random
+        }
+        species = Root.owner.species
+        flag = random
+
+        effect = {
+          randomize_flag_symbol = pirate
+          set_country_flag = pirate_republic
+          save_event_target_as = pirate_republic
+          establish_communications_no_message = root.owner
+          set_relation_flag = {
+            flag = rebelling_pirates_former_owner
+            who = Root.owner
+          }
+          Root = {
+            owner = {
+              every_relation = {
+                limit = { has_communications = prev }
+                establish_communications_no_message = prevprevprev
+              }
+            }
+            while = {
+              count = 25
+              create_army = {
+                name = "Pirate Invaders"
+                owner = event_target:pirate_republic
+                species = Root.owner.species
+                type = "pirate_army"
+              }
+            }
+          }
+          create_leader = {
+            class = ruler
+            species = owner_main_species
+            name = random
+            skill = 2
+            traits = {}
+          }
+          assign_leader = last_created_leader
+          ruler = {
+            add_random_leader_trait = yes
+          }
         }
       }
     }
