@@ -17,9 +17,7 @@ event = {
           has_country_flag = pirates_spawned
           has_ethic = ethic_gestalt_consciousness
         }
-        any_system_within_border = {
-          any_ship_in_system = { is_ship_size = pirate_station }
-        }
+        any_system_within_border = { is_pirate_system = yes }
         any_system_within_border = {
           NOT = { any_system_planet = { is_capital = yes } }
           any_system_planet = { is_colony = yes }
